@@ -1,3 +1,6 @@
+div {
+  box-sizing: border-box;
+}
 .nav-bar {
   display: flex;
   background-color: black;
@@ -5,11 +8,14 @@
   color: white;
   padding-left: 20px;
 }
-div {
-  box-sizing: border-box;
-}
 .list {
   padding-left: 20px;
   text-align: left;
   border-bottom: 1px solid grey;
+}
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #eee;
+  text-align: left;
 }
