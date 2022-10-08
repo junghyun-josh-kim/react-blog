@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-  let [title, setTitle] = useState(['bus', 'apple', 'trian']);
+  let [title, setTitle] = useState(['bus', 'apple', 'train']);
   let [like, setLike] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
 
@@ -29,34 +29,6 @@ function App() {
       >
         Today's Recommendation
       </button>
-      {/* <div className='list'>
-        <h4>
-          {title[0]}{' '}
-          <span
-            onClick={() => {
-              setLike(like + 1);
-            }}
-          >
-            👍
-          </span>{' '}
-          {like}
-        </h4>
-        <p>Oct 6, 2022</p>
-      </div>
-      <div className='list'>
-        <h4>{title[1]}</h4>
-        <p>Oct 6, 2022</p>
-      </div>
-      <div className='list'>
-        <h4
-          onClick={() => {
-            setModal(!modal);
-          }}
-        >
-          {title[2]}
-        </h4>
-        <p>Oct 6, 2022</p>
-      </div> */}
       {title.map(function (a, i) {
         return (
           <div
@@ -84,17 +56,21 @@ function App() {
           </div>
         );
       })}
-      {modal == true ? <Modal /> : null}
+      {modal == true ? <Modal title={title} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
-    <div className='modal'>
-      <h4>Title</h4>
+    <div
+      className='modal'
+      style={{ backgroundColor: 'red' }}
+    >
+      <h4>{props.title}</h4>
       <p>Date</p>
       <p>Detail</p>
+      <button>Edit Title</button>
     </div>
   );
 }
