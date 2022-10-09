@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
   let [title, setTitle] = useState(['bus', 'apple', 'train']);
   let [like, setLike] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [modalTitle, setModalTitle] = useState(0);
+  let [inputValue, setInputValue] = useState('');
 
   return (
     <div className='App'>
@@ -38,6 +40,7 @@ function App() {
             <h4
               onClick={() => {
                 modal == true ? setModal(false) : setModal(true);
+                setModalTitle(i);
               }}
             >
               {title[i]}
@@ -53,10 +56,38 @@ function App() {
             </span>{' '}
             {like[i]}
             <p>Oct 6, 2022</p>
+            <button
+              onClick={() => {
+                let titleCopy = [...title];
+                titleCopy.splice(i, 1);
+                setTitle(titleCopy);
+              }}
+            >
+              Delete
+            </button>
           </div>
         );
       })}
-      {modal == true ? <Modal title={title} /> : null}
+      <input
+        onChange={(event) => {
+          setInputValue(event.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          let titleCopy = [...title];
+          titleCopy.unshift(inputValue);
+          setTitle(titleCopy);
+        }}
+      >
+        Post
+      </button>
+      {modal == true ? (
+        <Modal
+          title={title}
+          modalTitle={modalTitle}
+        />
+      ) : null}
     </div>
   );
 }
@@ -65,9 +96,9 @@ function Modal(props) {
   return (
     <div
       className='modal'
-      style={{ backgroundColor: 'red' }}
+      style={{ backgroundColor: 'skyblue' }}
     >
-      <h4>{props.title}</h4>
+      <h4>{props.title[props.modalTitle]}</h4>
       <p>Date</p>
       <p>Detail</p>
       <button>Edit Title</button>
